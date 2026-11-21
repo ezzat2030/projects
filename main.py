@@ -1,5 +1,5 @@
 print("Hello Ezzat - GitHub Ready!")
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 import arabic_reshaper
 from bidi.algorithm import get_display
 
@@ -8,10 +8,13 @@ raw_text = "أهلاً بك يا عزت - جاهز للعمل"
 reshaped_text = arabic_reshaper.reshape(raw_text)
 bidi_text = get_display(reshaped_text)
 
-# إنشاء صورة خلفية داكنة وكتابة النص عليها
+# تحميل خط ويندوز يدعم العربية بحجم واضح (36)
+font = ImageFont.truetype("C:/Windows/Fonts/tahoma.ttf", 36)
+
+# إنشاء صورة خلفية داكنة وتوسيط النص عليها
 img = Image.new("RGB", (800, 300), color=(20, 24, 38))
 draw = ImageDraw.Draw(img)
-draw.text((260, 140), bidi_text, fill=(255, 215, 0))
+draw.text((400, 150), bidi_text, font=font, fill=(255, 215, 0), anchor="mm")
 
 img.save("welcome_banner.png")
-print("تم إنشاء الصورة welcome_banner.png بنجاح!")
+print("تم تحديث الصورة welcome_banner.png بخط عربي واضح!")
